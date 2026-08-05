@@ -1,3 +1,13 @@
+var nome = "José"
+console.log(nome)
+nome = "João"
+console.log(nome)
+
+//let nome = "Ana"
+//console.log(nome)
+//nome = "Ana Maria"
+//console.log(nome)
+
 //começando...
 //const, let, var
 // a = 2

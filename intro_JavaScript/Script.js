@@ -1,4 +1,67 @@
+//objetos Javascript
+//objetos JSON (JavaScript Object Notation)
+//Uma calculadora realiza as operações de soma e subtração
+const calculadora = {
+    somar: (a, b) => a + b,
+    subtrair: (a, b) => a - b,
+    dividir: (a,b) => a/b,
+    multiplicar: (a,b) => a*b
+},
+
+
+
 /*
+
+//Uma concessionária que tem CNPJ e endereço. Endereço tem rua, bairro e 
+//numero. A concessionária tem uma coleção de veiculos. Cada Veiculo
+//tem marca, modelo e ano de fabricação
+
+
+let concessionaria = {
+    CNPJ: 123456789,
+    endereco: {
+        rua: 'a',
+        bairro: 'a',
+        numero: 209
+    },
+    //uso de colchetes permite a instanciação de diversos modelos
+    veiculo: [
+        {marca: 'Volkswagen',
+        modelo: 'Polo',
+        anoDeFabricacao: 2011}
+        {marca: 'Ford',
+        modelo: 'Ka',
+        anoDeFabricacao: 2006
+        }
+    ]
+}
+console.log(concessionaria)
+
+//Uma pessoa que se chama Maria, tem 21 anos e mora na rua B, numero 20
+let pessoa = {
+    nome: "Maria",
+    idade: 21,
+    endereco: {
+        rua: 'B',
+        numero: 20
+    }
+}
+console.log(pessoa)
+
+
+//Uma pessoa e se chama João e tem 17 anos
+let pessoa = {
+    nome: "João",
+    idade: 17
+}
+//nome é uma chave e o joão é o valor
+
+
+
+
+
+
+
 function eAgora(){
     let cont = 1
     function f1(){

@@ -1,261 +1,357 @@
-//objetos Javascript
-//objetos JSON (JavaScript Object Notation)
-//Uma calculadora realiza as operações de soma e subtração
-const calculadora = {
-    somar: (a, b) => a + b,
-    subtrair: (a, b) => a - b,
-    dividir: (a,b) => a/b,
-    multiplicar: (a,b) => a*b
-},
-
-
-
-/*
-
-//Uma concessionária que tem CNPJ e endereço. Endereço tem rua, bairro e 
-//numero. A concessionária tem uma coleção de veiculos. Cada Veiculo
-//tem marca, modelo e ano de fabricação
-
-
-let concessionaria = {
-    CNPJ: 123456789,
-    endereco: {
-        rua: 'a',
-        bairro: 'a',
-        numero: 209
-    },
-    //uso de colchetes permite a instanciação de diversos modelos
-    veiculo: [
-        {marca: 'Volkswagen',
-        modelo: 'Polo',
-        anoDeFabricacao: 2011}
-        {marca: 'Ford',
-        modelo: 'Ka',
-        anoDeFabricacao: 2006
-        }
-    ]
-}
-console.log(concessionaria)
-
-//Uma pessoa que se chama Maria, tem 21 anos e mora na rua B, numero 20
-let pessoa = {
-    nome: "Maria",
-    idade: 21,
-    endereco: {
-        rua: 'B',
-        numero: 20
+//promise
+//1 + 2 + 3 + ... + (n-1) + n
+const calculoRapidinho = (n) => {
+    if(n < 0){
+        return Promise.reject("Apenas Positivos")
+    }else{
+        return Promise.resolve((n/2) * (n+1))
     }
-}
-console.log(pessoa)
-
-
-//Uma pessoa e se chama João e tem 17 anos
-let pessoa = {
-    nome: "João",
-    idade: 17
-}
-//nome é uma chave e o joão é o valor
-
-
-
-
-
-
-
-function eAgora(){
-    let cont = 1
-    function f1(){
-        console.log(cont++)
-    }
-    cont++
-    function f2(){
-        console.log(cont)
-    }
-    return (f1, f2)
-}
-let res = eAgora()
-res.f1()
-res.f2()
-
-//closure
-
-function saudacoesFactory(saudacao, nome){
-    return function(){
-        return saudacao + ", " + nome
-    }
+    // ajustar essa função
+    // se n for negativo, devolver uma promise rejected, associada ao texto "Apenas positivos"
+    // caso contrário, devolver essa promise que já é devolvida no momento
 }
 
-const olaJoao = saudacoesFactory("Olá", "João")
-const tchauJoao = saudacoesFactory("Tchau", "João")
-console.log(olaJoao())
-console.log(tchauJoao())
+calculoRapidinho(-100)
+.then((res) => {console.log(`Resultado: $(res)`)})
+.catch((error) => {console.log(error)})
+// function calculoDemorado(n){
+// return new Promise(function(resolve, reject){
+//     let res = 0
+//     for(let i=1; i <= n;i++){
+//         res += i 
+//     }
+//     resolve(res)
+// })
+// }
+// //construção then/catch
+// // calculoDemorado(100).then((resultado => (console.log(resultado))))
+// const auxiliar = calculoDemorado(100)
+// auxiliar.then(function(res){
+//     console.log(res)
+// })
 
-function ola(){
-    let nome = 'João'
-    return function(){
-        console.log('Olá, ' + nome)
-    }
-}
-let olaResult = ola()
-olaResult()
+// //CPU-Bound: dominada por cálculos, contas (um loop de soma de 1 a 100)
+// //IO-Bound: dominada por operações de entrada e saída (acesso a arquivos, requisções HTTP)
+// const fs = require('fs') //file system
+// console.log("A")
+// //entrega o nome de um arquivo e ele retorna a leitura dele
+// const abrirArquivo = function (nomeArquivo){
+//     //definir uma função callback
+//     const exibirConteudo = function (erro, conteudo) {
+//         if(erro){
+//             console.log(`Deu erro: $(erro)`)
+//         }else{
+//             console.log(conteudo.toString())
+//             const dobro = +conteudo.toString() * 2
+//             const finalizar = function(erro){
+//                 if(erro){
+//                     console.log('Erro ao salvar o dobro')
+//                 }else{
+//                     console.log('Salvou o dobro ok');
+//                     console.log("F")
+//                 }
+//             }
+//             fs.writeFile('dobro.txt', dobro.toString(), finalizar)
+//         }
+//         console.log("D")
+//     }
+//     //chamar a função de leitura do arquivo do módulo fs, entregando a callback com parâmetro
+//     fs.readFile(nomeArquivo, exibirConteudo)
+//     console.log("C")
+// }
+// abrirArquivo("arquivo.txt")
+// console.log("B")
 
-function f(){
-    let nome = 'João'
-    function g(){
-        console.log(nome)
-    }
-    g()
-}
-f()
-//
-let umaFuncao = function(){
-    console.log("Fui armazenada em uma variavel")
-}
-umaFuncao()
-function f(funcao){
-    funcao()
-}
-
-function g(){
-    function outraFuncao(){
-        console.log("Fui criada por g")
-    }
-    return outraFuncao
-}
-f(function(){
-    console.log("Estou sendo passada para f")
-})
-
-const gResult = g()
-gResult()
-g()() //primeiro chama a função g e depois chama a ouraFuncao
-// g()()()
-f(g())
-//arrow function 
-const hello = () => {console.log('Oi')}
-hello()
-const dobro = (n) => 2 * n
-console.log(dobro(2))
-const ehPar = n => n % 2 === 0
-console.log(ehPar(7))
-const echo = n => n
-console.log(echo(5))
-
-const dobro = function (n){
-    return 2 * n
-}
-console.log(dobro(2))
-const triplo = function (n){
-    return 3 * n
-}
-console.log(triplo(10))
-//Funções
-//funcões regulares e arrow functions
+// console.log('script principal começou...')
+// setTimeout(() => {
+//     console.log('dentro da timeout...')
+// }, 0)
+// const data = new Date().getTime() + 10000
+// while(new Date().getTime() <= data);
+// console.log('script principal terminou...')
 
 
-function soma(a,b){
-    return a+b
-}
-const res = soma(2,3)
-console.log(res)
-
-function hello(){
-    console.log('oi')
-}
-hello()
-function hello(nome){
-    console.log('oi, ' + nome)
-}
-hello('Ana')
-//vetores (bem parecidos com o arraylist do java)
-const nomes = ["Ana Maria", "Antonio", "Alex", "Cristina"]
-//Filter
-const apenasComA = nomes.filter((n) => {return n.startsWith("A")})
-console.log(apenasComA)
-//map
-const iniciais = nomes.map((n) => {return n.charAt(0)})
-console.log(iniciais)
-//reduce
-const valores = [1, 2, 3 ,4]
-const soma = valores.reduce((ac, V) => {return ac + V})
-console.log(soma)
-//every
-const todosComecamComA = nomes.every((n) => {return n.startsWith("A")})
-console.log(todosComecamComA)
-
-v1 = []
-v1[0] = 3.4
-v1[10] = 2 
-v1[2] = "abc"
-v1[102] = 1 
-console.log(v1.length)
-
-v2 = [2, "abc", true]
-console.log(v2)
-for(let i = 0; i< v2.length; i++){
-    console.log(v2[i])
-}
+// //Modelo assíncrono não bloqueante
+// function demorada(){
+//     const atualMais2Segundos = new Date().getTime + 2000
+//     while(new Date().getTime() <= atualMais2Segundos);
+//     const d = 8 + 4
+//     return d
+// }
+// const a = 2 + 3
+// const b = 5 + 9
+// const d = demorada()
+// setTimeout(() => {
+//     const d = demorada()
+//     console.log(`d: ${d}`)
+// }, 500)
+// const e = 2 + a + b
+// console.log(e)
 
 
-//Comparação
-//== Faz coerção (Mal uso)
-//=== Não faz coerção 
-console.log(1 == 1)             //true
-console.log(1 == '1')           //true
-console.log(1 === 1)            //true
-console.log(1 === '1')          //false
-console.log(true == 1)          //true
-console.log(1 == [1])           //true
-console.log(null == null)       //true
-console.log(null == undefined)  //true
-console.log([] == false)        //true
-console.log([] == [])           //false
+// const a = 2 + 7
+// const b = 5
+// console.log(a + b)
 
-//Coerção
-const n1 = 2
-const n2 = '3'
-//Coerção implicita
-const n3 = n1 + n2
-console.log(n3)
-//Coerção explicita
-const n4 = n1 + Number(n2)
-console.log(n4)
+// //Modelo sequencial síncrono bloqueante
+// console.log('Eu primeiro...')
+// console.log('Agora eu')
+// console.log('Sempre vou ser a última...:(')
 
-hoist: içamento 
+// //objetos Javascript
+// //objetos JSON (JavaScript Object Notation)
+// //Uma calculadora realiza as operações de soma e subtração
+// const calculadora = {
+//     somar: (a, b) => a + b,
+//     subtrair: (a, b) => a - b,
+//     dividir: (a,b) => a/b,
+//     multiplicar: (a,b) => a*b
+// },
 
-var idade = 18
-console.log("Oi, " + nome)
-if(idade >= 18){
-    var nome = "João"
-    console.log("Parabens, " + nome + ". Você pode dirigir")
-}
-console.log("Até mais, " + nome)
-
-let linguagem = "Javascript"
-console.log("Aprendendo " + linguagem)
-let linguagem = "Java"
-console.log("Aprendendo " + linguagem)
-
-var nome = "José"
-console.log(nome)
-nome = "João"
-console.log(nome)
-
-let nome = "Ana"
-console.log(nome)
-nome = "Ana Maria"
-console.log(nome)
-
-começando...
-const, let, var
-a = 2
-console.log(typeof(a))
-a = "abc"
-console. log(typeof(a))
-a.falar()
+// //Uma concessionária que tem CNPJ e endereço. Endereço tem rua, bairro e 
+// //numero. A concessionária tem uma coleção de veiculos. Cada Veiculo
+// //tem marca, modelo e ano de fabricação
 
 
-int a = 2;
-a = "abc";
-a.falar();
-*/
+// let concessionaria = {
+//     CNPJ: 123456789,
+//     endereco: {
+//         rua: 'a',
+//         bairro: 'a',
+//         numero: 209
+//     },
+//     //uso de colchetes permite a instanciação de diversos modelos
+//     veiculo: [
+//         {marca: 'Volkswagen',
+//         modelo: 'Polo',
+//         anoDeFabricacao: 2011}
+//         {marca: 'Ford',
+//         modelo: 'Ka',
+//         anoDeFabricacao: 2006
+//         }
+//     ]
+// }
+// console.log(concessionaria)
+
+// //Uma pessoa que se chama Maria, tem 21 anos e mora na rua B, numero 20
+// let pessoa = {
+//     nome: "Maria",
+//     idade: 21,
+//     endereco: {
+//         rua: 'B',
+//         numero: 20
+//     }
+// }
+// console.log(pessoa)
+
+
+// //Uma pessoa e se chama João e tem 17 anos
+// let pessoa = {
+//     nome: "João",
+//     idade: 17
+// }
+// //nome é uma chave e o joão é o valor
+
+
+
+
+
+
+
+// function eAgora(){
+//     let cont = 1
+//     function f1(){
+//         console.log(cont++)
+//     }
+//     cont++
+//     function f2(){
+//         console.log(cont)
+//     }
+//     return (f1, f2)
+// }
+// let res = eAgora()
+// res.f1()
+// res.f2()
+
+// //closure
+
+// function saudacoesFactory(saudacao, nome){
+//     return function(){
+//         return saudacao + ", " + nome
+//     }
+// }
+
+// const olaJoao = saudacoesFactory("Olá", "João")
+// const tchauJoao = saudacoesFactory("Tchau", "João")
+// console.log(olaJoao())
+// console.log(tchauJoao())
+
+// function ola(){
+//     let nome = 'João'
+//     return function(){
+//         console.log('Olá, ' + nome)
+//     }
+// }
+// let olaResult = ola()
+// olaResult()
+
+// function f(){
+//     let nome = 'João'
+//     function g(){
+//         console.log(nome)
+//     }
+//     g()
+// }
+// f()
+// //
+// let umaFuncao = function(){
+//     console.log("Fui armazenada em uma variavel")
+// }
+// umaFuncao()
+// function f(funcao){
+//     funcao()
+// }
+
+// function g(){
+//     function outraFuncao(){
+//         console.log("Fui criada por g")
+//     }
+//     return outraFuncao
+// }
+// f(function(){
+//     console.log("Estou sendo passada para f")
+// })
+
+// const gResult = g()
+// gResult()
+// g()() //primeiro chama a função g e depois chama a ouraFuncao
+// // g()()()
+// f(g())
+// //arrow function 
+// const hello = () => {console.log('Oi')}
+// hello()
+// const dobro = (n) => 2 * n
+// console.log(dobro(2))
+// const ehPar = n => n % 2 === 0
+// console.log(ehPar(7))
+// const echo = n => n
+// console.log(echo(5))
+
+// const dobro = function (n){
+//     return 2 * n
+// }
+// console.log(dobro(2))
+// const triplo = function (n){
+//     return 3 * n
+// }
+// console.log(triplo(10))
+// //Funções
+// //funcões regulares e arrow functions
+
+
+// function soma(a,b){
+//     return a+b
+// }
+// const res = soma(2,3)
+// console.log(res)
+
+// function hello(){
+//     console.log('oi')
+// }
+// hello()
+// function hello(nome){
+//     console.log('oi, ' + nome)
+// }
+// hello('Ana')
+// //vetores (bem parecidos com o arraylist do java)
+// const nomes = ["Ana Maria", "Antonio", "Alex", "Cristina"]
+// //Filter
+// const apenasComA = nomes.filter((n) => {return n.startsWith("A")})
+// console.log(apenasComA)
+// //map
+// const iniciais = nomes.map((n) => {return n.charAt(0)})
+// console.log(iniciais)
+// //reduce
+// const valores = [1, 2, 3 ,4]
+// const soma = valores.reduce((ac, V) => {return ac + V})
+// console.log(soma)
+// //every
+// const todosComecamComA = nomes.every((n) => {return n.startsWith("A")})
+// console.log(todosComecamComA)
+
+// v1 = []
+// v1[0] = 3.4
+// v1[10] = 2 
+// v1[2] = "abc"
+// v1[102] = 1 
+// console.log(v1.length)
+
+// v2 = [2, "abc", true]
+// console.log(v2)
+// for(let i = 0; i< v2.length; i++){
+//     console.log(v2[i])
+// }
+
+
+// //Comparação
+// //== Faz coerção (Mal uso)
+// //=== Não faz coerção 
+// console.log(1 == 1)             //true
+// console.log(1 == '1')           //true
+// console.log(1 === 1)            //true
+// console.log(1 === '1')          //false
+// console.log(true == 1)          //true
+// console.log(1 == [1])           //true
+// console.log(null == null)       //true
+// console.log(null == undefined)  //true
+// console.log([] == false)        //true
+// console.log([] == [])           //false
+
+// //Coerção
+// const n1 = 2
+// const n2 = '3'
+// //Coerção implicita
+// const n3 = n1 + n2
+// console.log(n3)
+// //Coerção explicita
+// const n4 = n1 + Number(n2)
+// console.log(n4)
+
+// hoist: içamento 
+
+// var idade = 18
+// console.log("Oi, " + nome)
+// if(idade >= 18){
+//     var nome = "João"
+//     console.log("Parabens, " + nome + ". Você pode dirigir")
+// }
+// console.log("Até mais, " + nome)
+
+// let linguagem = "Javascript"
+// console.log("Aprendendo " + linguagem)
+// let linguagem = "Java"
+// console.log("Aprendendo " + linguagem)
+
+// var nome = "José"
+// console.log(nome)
+// nome = "João"
+// console.log(nome)
+
+// let nome = "Ana"
+// console.log(nome)
+// nome = "Ana Maria"
+// console.log(nome)
+
+// começando...
+// const, let, var
+// a = 2
+// console.log(typeof(a))
+// a = "abc"
+// console. log(typeof(a))
+// a.falar()
+
+
+// int a = 2;
+// a = "abc";
+// a.falar();
+// */

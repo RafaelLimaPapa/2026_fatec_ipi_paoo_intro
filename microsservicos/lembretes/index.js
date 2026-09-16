@@ -1,3 +1,4 @@
+const axios = require('axios')
 const express = require('express')
 const app = express()
 //middleware
@@ -13,7 +14,7 @@ app.use(express.json())
       texto: 'Ir à feira'
       }
       }
-      */
+*/
 let id = 1
 const lembretes = {}
 //API: Application Programming Interface: coleção de endpoints
@@ -21,13 +22,18 @@ const lembretes = {}
 //Criar um lembrete
 //POST /lembretes
 //endpoint: uma tripla: método do protocolo HTTP, padrão de acesso e funcionalidade
-app.post("/lembretes", (req, res) => {
+app.post("/lembretes", async (req, res) => {
   // { texto: "Fazer café"}
   const texto = req.body.texto
-  lembretes[id] = {
+  const lembrete = {
     id: id,
-    texto: texto  
+    texto: texto
   }
+  lembretes[id] = lembrete
+  await axios.post('http://localhost:10000/eventos', {
+    tipo: 'LembreteCriado',
+    dados: lembrete
+  })
   id++
   res.json({mensagem: 'ok'})
 })
@@ -36,5 +42,13 @@ app.post("/lembretes", (req, res) => {
 app.get("/lembretes", function(req, res){
   res.json(lembretes)
 })
+
+app.post("/eventos", (req,res) => {
+  const evento = req.body
+  console.log(evento)
+  res.end()
+})
+
+
 const port = 4000
 app.listen(port, () => console.log(`Lembretes. ${port}.`))
